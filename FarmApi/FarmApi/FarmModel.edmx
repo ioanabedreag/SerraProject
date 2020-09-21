@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FarmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="AddHarvestedQuantityByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QRCode" Type="nchar" Mode="In" />
+          <Parameter Name="quantity" Type="float" Mode="In" />
+          <Parameter Name="username" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="AddPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Harvest" Type="nchar" Mode="In" />
+          <Parameter Name="PlantationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nchar" Mode="In" />
+          <Parameter Name="Password" Type="nchar" Mode="In" />
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <Parameter Name="CNP" Type="nchar" Mode="In" />
+          <Parameter Name="Addess" Type="nchar" Mode="In" />
+          <Parameter Name="Email" Type="nchar" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nchar" Mode="In" />
+          <Parameter Name="QRCode" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="DeletePlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PlantationID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QRCode" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllPlantations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllWorkers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPlantationByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetQuantitiesByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QRCode" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="GetTotalQuantityByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QRCode" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PlantationID" Type="int" Mode="In" />
+          <Parameter Name="Harvest" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="Username" Type="nchar" Mode="In" />
+          <Parameter Name="Password" Type="nchar" Mode="In" />
+          <Parameter Name="Name" Type="nchar" Mode="In" />
+          <Parameter Name="CNP" Type="nchar" Mode="In" />
+          <Parameter Name="Addess" Type="nchar" Mode="In" />
+          <Parameter Name="Email" Type="nchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="FarmModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FarmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FarmEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="AddHarvestedQuantityByWorker">
+            <Parameter Name="QRCode" Mode="In" Type="String" />
+            <Parameter Name="quantity" Mode="In" Type="Double" />
+            <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddPlantation">
+            <Parameter Name="Harvest" Mode="In" Type="String" />
+            <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddUser">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="CNP" Mode="In" Type="String" />
+            <Parameter Name="Addess" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddWorker">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="QRCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePlantation">
+            <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUser">
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteWorker">
+            <Parameter Name="QRCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllPlantations" ReturnType="Collection(FarmModel.GetAllPlantations_Result)" />
+          <FunctionImport Name="GetAllUsers" ReturnType="Collection(FarmModel.GetAllUsers_Result)" />
+          <FunctionImport Name="GetAllWorkers" ReturnType="Collection(FarmModel.GetAllWorkers_Result)" />
+          <FunctionImport Name="GetPlantationByUserID" ReturnType="Collection(FarmModel.GetPlantationByUserID_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetQuantitiesByWorker" ReturnType="Collection(FarmModel.GetQuantitiesByWorker_Result)">
+            <Parameter Name="QRCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTotalQuantityByWorker" ReturnType="Collection(Double)">
+            <Parameter Name="QRCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePlantation">
+            <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+            <Parameter Name="Harvest" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUser">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="CNP" Mode="In" Type="String" />
+            <Parameter Name="Addess" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllPlantations_Result">
+          <Property Type="Int32" Name="PlantationID" Nullable="false" />
+          <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllUsers_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="CNP" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GetAllWorkers_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="QRCode" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="GetPlantationByUserID_Result">
+          <Property Type="Int32" Name="PlantationID" Nullable="false" />
+          <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetQuantitiesByWorker_Result">
+          <Property Type="Double" Name="Quantity" Nullable="false" />
+          <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FarmModelStoreContainer" CdmEntityContainer="FarmEntities" >
+          <FunctionImportMapping FunctionImportName="AddHarvestedQuantityByWorker" FunctionName="FarmModel.Store.AddHarvestedQuantityByWorker" />
+          <FunctionImportMapping FunctionImportName="AddPlantation" FunctionName="FarmModel.Store.AddPlantation" />
+          <FunctionImportMapping FunctionImportName="AddUser" FunctionName="FarmModel.Store.AddUser" />
+          <FunctionImportMapping FunctionImportName="AddWorker" FunctionName="FarmModel.Store.AddWorker" />
+          <FunctionImportMapping FunctionImportName="DeletePlantation" FunctionName="FarmModel.Store.DeletePlantation" />
+          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="FarmModel.Store.DeleteUser" />
+          <FunctionImportMapping FunctionImportName="DeleteWorker" FunctionName="FarmModel.Store.DeleteWorker" />
+          <FunctionImportMapping FunctionImportName="GetAllPlantations" FunctionName="FarmModel.Store.GetAllPlantations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmModel.GetAllPlantations_Result">
+                <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
+                <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="FarmModel.Store.GetAllUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmModel.GetAllUsers_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CNP" ColumnName="CNP" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllWorkers" FunctionName="FarmModel.Store.GetAllWorkers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmModel.GetAllWorkers_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPlantationByUserID" FunctionName="FarmModel.Store.GetPlantationByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmModel.GetPlantationByUserID_Result">
+                <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
+                <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetQuantitiesByWorker" FunctionName="FarmModel.Store.GetQuantitiesByWorker">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FarmModel.GetQuantitiesByWorker_Result">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTotalQuantityByWorker" FunctionName="FarmModel.Store.GetTotalQuantityByWorker" />
+          <FunctionImportMapping FunctionImportName="UpdatePlantation" FunctionName="FarmModel.Store.UpdatePlantation" />
+          <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="FarmModel.Store.UpdateUser" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
