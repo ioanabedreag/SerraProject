@@ -40,6 +40,23 @@ namespace FarmApi.Controllers
             }
         }
 
+        public IHttpActionResult AddHarvestedQuantityByWorker([FromBody] dynamic client)
+        {
+            _context = new FarmEntities();
+            try
+            {
+                String name = client["Username"];
+                String qRCode = client["QRCode"];
+                float quantity = client["Quantity"];
+                _context.AddHarvestedQuantityByWorker(qRCode, quantity, name);
+                return Ok("Harvested quantity by worker added successfully!");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
         public IHttpActionResult GetQuantitiesByWorker([FromBody] dynamic client)
         {
             _context = new FarmEntities();
