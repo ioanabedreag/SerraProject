@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FarmModelStoreContainer" CdmEntityContainer="FarmEntities">
+    <FunctionImportMapping FunctionImportName="AddHarvestedQuantityByWorker" FunctionName="FarmModel.Store.AddHarvestedQuantityByWorker" />
+    <FunctionImportMapping FunctionImportName="AddPlantation" FunctionName="FarmModel.Store.AddPlantation" />
+    <FunctionImportMapping FunctionImportName="AddUser" FunctionName="FarmModel.Store.AddUser" />
+    <FunctionImportMapping FunctionImportName="AddWorker" FunctionName="FarmModel.Store.AddWorker" />
+    <FunctionImportMapping FunctionImportName="DeletePlantation" FunctionName="FarmModel.Store.DeletePlantation" />
+    <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="FarmModel.Store.DeleteUser" />
+    <FunctionImportMapping FunctionImportName="DeleteWorker" FunctionName="FarmModel.Store.DeleteWorker" />
+    <FunctionImportMapping FunctionImportName="GetAllPlantations" FunctionName="FarmModel.Store.GetAllPlantations">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmModel.GetAllPlantations_Result">
+          <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
+          <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="FarmModel.Store.GetAllUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmModel.GetAllUsers_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CNP" ColumnName="CNP" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllWorkers" FunctionName="FarmModel.Store.GetAllWorkers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmModel.GetAllWorkers_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPlantationByUserID" FunctionName="FarmModel.Store.GetPlantationByUserID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmModel.GetPlantationByUserID_Result">
+          <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
+          <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetQuantitiesByWorker" FunctionName="FarmModel.Store.GetQuantitiesByWorker">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmModel.GetQuantitiesByWorker_Result">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTotalQuantityByWorker" FunctionName="FarmModel.Store.GetTotalQuantityByWorker" />
+    <FunctionImportMapping FunctionImportName="UpdatePlantation" FunctionName="FarmModel.Store.UpdatePlantation" />
+    <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="FarmModel.Store.UpdateUser" />
+  </EntityContainerMapping>
+</Mapping>

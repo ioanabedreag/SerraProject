@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FarmEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="AddHarvestedQuantityByWorker">
+      <Parameter Name="QRCode" Mode="In" Type="String" />
+      <Parameter Name="quantity" Mode="In" Type="Double" />
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddPlantation">
+      <Parameter Name="Harvest" Mode="In" Type="String" />
+      <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddUser">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="CNP" Mode="In" Type="String" />
+      <Parameter Name="Addess" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddWorker">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="QRCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeletePlantation">
+      <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteUser">
+      <Parameter Name="Username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteWorker">
+      <Parameter Name="QRCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllPlantations" ReturnType="Collection(FarmModel.GetAllPlantations_Result)" />
+    <FunctionImport Name="GetAllUsers" ReturnType="Collection(FarmModel.GetAllUsers_Result)" />
+    <FunctionImport Name="GetAllWorkers" ReturnType="Collection(FarmModel.GetAllWorkers_Result)" />
+    <FunctionImport Name="GetPlantationByUserID" ReturnType="Collection(FarmModel.GetPlantationByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetQuantitiesByWorker" ReturnType="Collection(FarmModel.GetQuantitiesByWorker_Result)">
+      <Parameter Name="QRCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetTotalQuantityByWorker" ReturnType="Collection(Double)">
+      <Parameter Name="QRCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdatePlantation">
+      <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+      <Parameter Name="Harvest" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateUser">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="CNP" Mode="In" Type="String" />
+      <Parameter Name="Addess" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAllPlantations_Result">
+    <Property Type="Int32" Name="PlantationID" Nullable="false" />
+    <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetAllUsers_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="CNP" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="GetAllWorkers_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="QRCode" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="GetPlantationByUserID_Result">
+    <Property Type="Int32" Name="PlantationID" Nullable="false" />
+    <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetQuantitiesByWorker_Result">
+    <Property Type="Double" Name="Quantity" Nullable="false" />
+    <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+  </ComplexType>
+</Schema>

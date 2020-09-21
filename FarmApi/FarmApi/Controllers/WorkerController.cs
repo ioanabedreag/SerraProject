@@ -57,13 +57,12 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult GetQuantitiesByWorker([FromBody] dynamic client)
+        public IHttpActionResult GetQuantitiesByWorker(string qrCode)
         {
             _context = new FarmEntities();
             try
             {
-                String qRCode = client["QRCode"];
-                var quantities = _context.GetQuantitiesByWorker(qRCode);
+                var quantities = _context.GetQuantitiesByWorker(qrCode);
                 return Ok(quantities);
             }
             catch (Exception ex)
@@ -72,13 +71,12 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult GetTotalQuantityByWorker([FromBody] dynamic client)
+        public IHttpActionResult GetTotalQuantityByWorker(string qrCode)
         {
             _context = new FarmEntities();
             try
             {
-                String qRCode = client["QRCode"];
-                var quantity = _context.GetTotalQuantityByWorker(qRCode);
+                var quantity = _context.GetTotalQuantityByWorker(qrCode);
                 return Ok(quantity);
             }
             catch (Exception ex)
