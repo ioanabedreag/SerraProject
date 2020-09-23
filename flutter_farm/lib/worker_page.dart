@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
+
 class WorkerPage extends StatefulWidget {
   WorkerPage({Key key, this.title}) : super(key: key);
 
@@ -43,6 +45,20 @@ class _WorkerPageState extends State<WorkerPage> {
               },
               decoration: InputDecoration(hintText: "Quantity"),
             ),
+            RaisedButton(
+              elevation: 90,
+              color: Colors.white,
+              textColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(title: "Home")));
+              },
+              child: Text("Done"),
+            )
           ],
         ),
       ),

@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image(image: AssetImage('lib/assets/plantation.jpg')),
             RaisedButton(
               elevation: 90,
               color: Colors.white,

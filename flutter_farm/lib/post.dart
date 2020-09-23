@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+import 'package:flutter_farm/home_page.dart';
+
 class PostPage extends StatefulWidget {
   PostPage({Key key}) : super(key: key);
 
@@ -85,7 +87,7 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Post page"),
+        title: Text("Add New User"),
       ),
       body: Center(
         child: Column(
@@ -145,10 +147,12 @@ class _PostPageState extends State<PostPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PostPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(title: "Home")));
               },
-              child: Text("Post"),
+              child: Text("Done"),
             )
           ],
         ),
