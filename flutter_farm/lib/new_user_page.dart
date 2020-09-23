@@ -6,15 +6,29 @@ import 'dart:async';
 
 import 'package:flutter_farm/home_page.dart';
 
-class PostPage extends StatefulWidget {
-  PostPage({Key key}) : super(key: key);
+class NewUserPage extends StatefulWidget {
+  NewUserPage({Key key}) : super(key: key);
 
   @override
-  _PostPageState createState() => _PostPageState();
+  _NewUserPageState createState() => _NewUserPageState();
 }
 
-class _PostPageState extends State<PostPage> {
+class _NewUserPageState extends State<NewUserPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController cnpController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
+  bool isUsernameValidate = false;
+  bool isPasswordValidate = false;
+  bool isNameValidate = false;
+  bool isCNPValidate = false;
+  bool isAddressValidate = false;
+  bool isEmailValidate = false;
+
   String username = "";
   String password = "";
   String name = "";
@@ -82,6 +96,19 @@ class _PostPageState extends State<PostPage> {
     return null;
   }
 
+  bool validateTextField(String userInput) {
+    if (userInput.isEmpty) {
+      setState(() {
+        isUsernameValidate = true;
+      });
+      return false;
+    }
+    setState(() {
+      isUsernameValidate = false;
+    });
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,20 +120,26 @@ class _PostPageState extends State<PostPage> {
         child: Column(
           children: <Widget>[
             TextField(
+              controller: usernameController,
+              decoration: InputDecoration(
+                  hintText: "Username",
+                  errorText:
+                      isUsernameValidate ? 'Please enter an username' : null),
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = username,
               onChanged: (value) {
                 username = value;
               },
-              decoration: InputDecoration(hintText: "Username"),
             ),
             TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                  hintText: "Password",
+                  errorText:
+                      isPasswordValidate ? 'Please enter a password' : null),
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = password,
               onChanged: (value) {
                 password = value;
               },
-              decoration: InputDecoration(hintText: "Password"),
             ),
             TextField(
               textAlign: TextAlign.center,
@@ -147,10 +180,12 @@ class _PostPageState extends State<PostPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(title: "Home")));
+                validateTextField(usernameController.text);
+
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => HomePage(title: "Home")));
               },
               child: Text("Done"),
             )

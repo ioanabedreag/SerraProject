@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_farm/post.dart';
-import 'package:flutter_farm/users_page.dart';
+import 'package:flutter_farm/new_user_page.dart';
 import 'package:flutter_farm/worker_page.dart';
 
 import 'login_page.dart';
@@ -52,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PostPage()));
+                    MaterialPageRoute(builder: (context) => NewUserPage()));
               },
               child: Text("Add New User"),
             ),
