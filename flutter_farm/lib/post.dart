@@ -89,7 +89,6 @@ class _PostPageState extends State<PostPage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
               textAlign: TextAlign.center,
@@ -139,6 +138,18 @@ class _PostPageState extends State<PostPage> {
               },
               decoration: InputDecoration(hintText: "Email"),
             ),
+            RaisedButton(
+              elevation: 90,
+              color: Colors.white,
+              textColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PostPage()));
+              },
+              child: Text("Post"),
+            )
           ],
         ),
       ),
