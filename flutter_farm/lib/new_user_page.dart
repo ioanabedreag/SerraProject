@@ -27,6 +27,7 @@ class _NewUserPageState extends State<NewUserPage> {
   String cnp = "";
   String address = "";
   String email = "";
+  String plantation = "";
 
   @override
   void initState() {
@@ -68,7 +69,8 @@ class _NewUserPageState extends State<NewUserPage> {
       "Name": name,
       "CNP": cnp,
       "Address": address,
-      "Email": email
+      "Email": email,
+      "Plantation": plantation
     });
 
     var result = await http.post(
@@ -182,6 +184,19 @@ class _NewUserPageState extends State<NewUserPage> {
                 return null;
               },
               decoration: InputDecoration(hintText: "Email"),
+            ),
+            TextFormField(
+              textAlign: TextAlign.center,
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                plantation = value;
+              },
+              decoration: InputDecoration(hintText: "Plantation"),
             ),
             RaisedButton(
               elevation: 90,

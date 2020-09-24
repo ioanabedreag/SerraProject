@@ -39,21 +39,19 @@ class _WorkerPageState extends State<WorkerPage> {
       index++;
     }
     index++;
-    print(usernameWorker);
     while (index < qrCode.length) {
       usernameUser += qrCode[index];
       index++;
     }
-    print(usernameUser);
 
     var body = jsonEncode({
-      "UsernameWorker": usernameWorker,
-      "UsernameUser": usernameUser,
+      "WorkerName": usernameWorker,
+      "Username": usernameUser,
       "Quantity": quantity,
     });
 
     var result = await http.post(
-      ApiUrl.addUserUrl,
+      ApiUrl.addHarvestQunatityUrl,
       body: body,
       headers: {
         "content-type": "application/json",
