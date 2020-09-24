@@ -1,10 +1,14 @@
 import 'dart:convert';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
+// import 'package:flutter_farm/web_api_services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
 import 'package:flutter_farm/home_page.dart';
+
+import 'api_url.dart';
 
 class NewUserPage extends StatefulWidget {
   NewUserPage({Key key}) : super(key: key);
@@ -68,7 +72,7 @@ class _NewUserPageState extends State<NewUserPage> {
     });
 
     var result = await http.post(
-      "https://farmapi.conveyor.cloud/api/User/AddUser",
+      ApiUrl.addUserUrl,
       body: body,
       headers: {
         "content-type": "application/json",
@@ -143,8 +147,8 @@ class _NewUserPageState extends State<NewUserPage> {
             TextFormField(
               textAlign: TextAlign.center,
               validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
+                if (value == '' || value.length != 13) {
+                  return 'Insert a valid CNP';
                 }
                 return null;
               },
@@ -187,6 +191,8 @@ class _NewUserPageState extends State<NewUserPage> {
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
                 if (_formKey.currentState.validate()) {
+                  postData();
+                  // sleep(const Duration(seconds: 5));
                   Navigator.push(
                       context,
                       MaterialPageRoute(
