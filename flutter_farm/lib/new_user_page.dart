@@ -112,6 +112,7 @@ class _NewUserPageState extends State<NewUserPage> {
               },
             ),
             TextFormField(
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: "Password",
               ),

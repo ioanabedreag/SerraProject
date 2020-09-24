@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-// import 'package:flutter_farm/web_api_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_farm/worker_page.dart';
 
+import 'api_url.dart';
 import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,31 +20,35 @@ class _LoginPageState extends State<LoginPage> {
 
   String username = "";
   String password = "";
+  bool ok = false;
 
   List<dynamic> users = new List();
 
-  _LoginPageState() {
-    fetchData();
-  }
-
-  // Future<List<dynamic>> fetchData() async {
-  //   users = await WebApiServices.users;
+  // _LoginPageState() {
+  //   fetchData();
   // }
 
   Future<List<String>> fetchData() async {
-    var result =
-        await http.get('https://farmapi.conveyor.cloud/api/User/GetAllUsers');
-    var jsonResult = result.body;
-    setState(() {
-      users = json.decode(jsonResult);
-    });
+    var url =
+        ApiUrl.getUserUrl + 'username=' + username + '&password=' + password;
+    var result = await http.get(url);
+    if (result.body == "null") {
+      showErrorSnackBar();
+      return null;
+    }
+    // var jsonResult = result.body;
+    // setState(() {
+    //   users = json.decode(jsonResult);
+    // });
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => HomePage(title: "Home")));
     return null;
   }
 
   showErrorSnackBar() {
     final snackBar = new SnackBar(
       content: Text(
-        'There is an error!',
+        'There is no such user!',
         style: TextStyle(
             fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 20),
         textAlign: TextAlign.center,
@@ -55,21 +59,6 @@ class _LoginPageState extends State<LoginPage> {
     _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 
-  void verifyCredentials() {
-    for (var user in users) {
-      if (user['Username'] == username && user['Password'] == password) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WorkerPage(title: 'Worker'),
-          ),
-        );
-        return;
-      }
-    }
-    showErrorSnackBar();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,17 +67,10 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: Form(
-        key: _formKey,
+      body: Center(
         child: Column(
           children: <Widget>[
-            TextFormField(
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
+            TextField(
               decoration: InputDecoration(
                 hintText: "Username",
               ),
@@ -97,16 +79,11 @@ class _LoginPageState extends State<LoginPage> {
                 username = value;
               },
             ),
-            TextFormField(
+            TextField(
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: "Password",
               ),
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
               textAlign: TextAlign.center,
               onChanged: (value) {
                 password = value;
@@ -119,12 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(title: "Home")));
-                }
+                fetchData();
               },
               child: Text("Login"),
             )
