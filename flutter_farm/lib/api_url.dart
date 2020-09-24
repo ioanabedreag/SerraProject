@@ -10,4 +10,7 @@ class ApiUrl {
 
   static const String addHarvestQunatityUrl =
       'https://farmapi.conveyor.cloud/api/Worker/AddHarvestedQuantityByWorker';
+
+  static const String addWorkerUrl =
+      'https://farmapi.conveyor.cloud/api/Worker/AddWorker';
 }
