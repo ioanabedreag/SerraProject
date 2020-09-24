@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_farm/worker_page.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+
+import 'package:flutter_farm/worker_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<List<String>> fetchData() async {
     var result =
-        await http.get("https://farmapi.conveyor.cloud/api/User/GetAllUsers");
+        await http.get('https://farmapi.conveyor.cloud/api/User/GetAllUsers');
     var jsonResult = result.body;
     setState(() {
       users = json.decode(jsonResult);
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   showErrorSnackBar() {
     final snackBar = new SnackBar(
       content: Text(
-        "There is an error!",
+        'There is an error!',
         style: TextStyle(
             fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 20),
         textAlign: TextAlign.center,
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => WorkerPage(title: "Worker"),
+            builder: (context) => WorkerPage(title: 'Worker'),
           ),
         );
         return;
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text('Login'),
       ),
       body: Center(
         child: Column(
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               onChanged: (value) {
                 username = value;
               },
-              decoration: InputDecoration(hintText: "Username"),
+              decoration: InputDecoration(hintText: 'Username'),
             ),
             TextField(
               textAlign: TextAlign.center,
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
               onChanged: (value) {
                 password = value;
               },
-              decoration: InputDecoration(hintText: "Password"),
+              decoration: InputDecoration(hintText: 'Password'),
             ),
             RaisedButton(
               elevation: 90,

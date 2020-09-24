@@ -28,47 +28,44 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(image: AssetImage('lib/assets/plantation.jpg')),
-            RaisedButton(
-              elevation: 90,
-              color: Colors.white,
-              textColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
-              },
-              child: Text("Login"),
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                  left: 0.0, top: 50.0, right: 0.0, bottom: 100.0),
+              child: Image(
+                image: AssetImage('lib/assets/farm.png'),
+                width: 200,
+                alignment: Alignment.topLeft,
+              ),
             ),
-            RaisedButton(
-              elevation: 90,
-              color: Colors.white,
-              textColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewUserPage()));
-              },
-              child: Text("Add New User"),
+            Column(
+              children: <Widget>[
+                RaisedButton(
+                  elevation: 90,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text('Login'),
+                ),
+                RaisedButton(
+                  elevation: 90,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => NewUserPage()));
+                  },
+                  child: Text('Add New User'),
+                ),
+              ],
             ),
-            RaisedButton(
-              elevation: 90,
-              color: Colors.white,
-              textColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkerPage(title: "Worker")));
-              },
-              child: Text("Scan QR Code"),
-            )
           ],
         ),
       ),

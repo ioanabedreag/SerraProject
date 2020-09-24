@@ -1,8 +1,4 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:flutter_farm/user.dart';
 
@@ -19,17 +15,7 @@ class _UsersState extends State<Users> {
   List<dynamic> users = new List();
 
   _UsersState() {
-    fetchData();
-  }
-
-  Future<List<String>> fetchData() async {
-    var result =
-        await http.get("https://farmapi.conveyor.cloud/api/User/GetAllUsers");
-    var jsonResult = result.body;
-    setState(() {
-      users = json.decode(jsonResult);
-    });
-    return null;
+    // fetchData();
   }
 
   @override
