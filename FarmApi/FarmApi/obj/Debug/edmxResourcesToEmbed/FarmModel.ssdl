@@ -43,6 +43,10 @@
   <Function Name="GetTotalQuantityByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="QRCode" Type="nchar" Mode="In" />
   </Function>
+  <Function Name="GetUserByUsernameAndPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nchar" Mode="In" />
+    <Parameter Name="Password" Type="nchar" Mode="In" />
+  </Function>
   <Function Name="UpdatePlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PlantationID" Type="int" Mode="In" />
     <Parameter Name="Harvest" Type="nchar" Mode="In" />

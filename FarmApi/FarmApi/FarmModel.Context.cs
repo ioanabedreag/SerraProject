@@ -173,6 +173,19 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetTotalQuantityByWorker", qRCodeParameter);
         }
     
+        public virtual ObjectResult<GetUserByUsernameAndPassword_Result> GetUserByUsernameAndPassword(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserByUsernameAndPassword_Result>("GetUserByUsernameAndPassword", usernameParameter, passwordParameter);
+        }
+    
         public virtual int UpdatePlantation(Nullable<int> plantationID, string harvest)
         {
             var plantationIDParameter = plantationID.HasValue ?

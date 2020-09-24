@@ -198,6 +198,9 @@
     <Compile Include="GetQuantitiesByWorker_Result.cs">
       <DependentUpon>FarmModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetUserByUsernameAndPassword_Result.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

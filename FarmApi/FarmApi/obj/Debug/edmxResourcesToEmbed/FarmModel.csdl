@@ -44,6 +44,10 @@
     <FunctionImport Name="GetTotalQuantityByWorker" ReturnType="Collection(Double)">
       <Parameter Name="QRCode" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetUserByUsernameAndPassword" ReturnType="Collection(FarmModel.GetUserByUsernameAndPassword_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="UpdatePlantation">
       <Parameter Name="PlantationID" Mode="In" Type="Int32" />
       <Parameter Name="Harvest" Mode="In" Type="String" />
@@ -84,5 +88,14 @@
   <ComplexType Name="GetQuantitiesByWorker_Result">
     <Property Type="Double" Name="Quantity" Nullable="false" />
     <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="GetUserByUsernameAndPassword_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="CNP" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
   </ComplexType>
 </Schema>

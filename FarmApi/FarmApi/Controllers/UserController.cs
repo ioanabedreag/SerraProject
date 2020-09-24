@@ -59,18 +59,19 @@ namespace FarmApi.Controllers
             }
         }
 
-        //public IHttpActionResult GetUserByUsername(String username)
-        //{
-        //    _context = new FarmEntities();
-        //    try
-        //    {
-        //        //var user = _context.GetUserByUsername(username).FirstOrDefault();
-        //        //return Ok(user);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return InternalServerError(ex);
-        //    }
-        //}
+        public IHttpActionResult GetUserByUsernameAndPassword(String username, String password)
+        {
+            _context = new FarmEntities();
+            try
+            {
+                var user = _context.GetUserByUsernameAndPassword(username, password).FirstOrDefault();
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+            
+        }
     }
 }
