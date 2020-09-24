@@ -15,19 +15,7 @@ class NewUserPage extends StatefulWidget {
 
 class _NewUserPageState extends State<NewUserPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController cnpController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-
-  bool isUsernameValidate = false;
-  bool isPasswordValidate = false;
-  bool isNameValidate = false;
-  bool isCNPValidate = false;
-  bool isAddressValidate = false;
-  bool isEmailValidate = false;
+  final _formKey = GlobalKey<FormState>();
 
   String username = "";
   String password = "";
@@ -96,80 +84,97 @@ class _NewUserPageState extends State<NewUserPage> {
     return null;
   }
 
-  bool validateTextField(String userInput) {
-    if (userInput.isEmpty) {
-      setState(() {
-        isUsernameValidate = true;
-      });
-      return false;
-    }
-    setState(() {
-      isUsernameValidate = false;
-    });
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightGreen[200],
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Add New User"),
       ),
-      body: Center(
+      body: Form(
+        key: _formKey,
         child: Column(
           children: <Widget>[
-            TextField(
-              controller: usernameController,
+            TextFormField(
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
               decoration: InputDecoration(
-                  hintText: "Username",
-                  errorText:
-                      isUsernameValidate ? 'Please enter an username' : null),
+                hintText: "Username",
+              ),
               textAlign: TextAlign.center,
               onChanged: (value) {
                 username = value;
               },
             ),
-            TextField(
-              controller: passwordController,
+            TextFormField(
               decoration: InputDecoration(
-                  hintText: "Password",
-                  errorText:
-                      isPasswordValidate ? 'Please enter a password' : null),
+                hintText: "Password",
+              ),
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
               textAlign: TextAlign.center,
               onChanged: (value) {
                 password = value;
               },
             ),
-            TextField(
+            TextFormField(
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = name,
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
               onChanged: (value) {
                 name = value;
               },
               decoration: InputDecoration(hintText: "Name"),
             ),
-            TextField(
+            TextFormField(
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = cnp,
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
               onChanged: (value) {
                 cnp = value;
               },
               decoration: InputDecoration(hintText: "CNP"),
             ),
-            TextField(
+            TextFormField(
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = address,
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
               onChanged: (value) {
                 address = value;
               },
               decoration: InputDecoration(hintText: "Address"),
             ),
-            TextField(
+            TextFormField(
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = email,
               onChanged: (value) {
                 email = value;
+              },
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
               },
               decoration: InputDecoration(hintText: "Email"),
             ),
@@ -180,12 +185,12 @@ class _NewUserPageState extends State<NewUserPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
-                validateTextField(usernameController.text);
-
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => HomePage(title: "Home")));
+                if (_formKey.currentState.validate()) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage(title: "Home")));
+                }
               },
               child: Text("Done"),
             )

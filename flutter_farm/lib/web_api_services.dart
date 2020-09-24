@@ -40,7 +40,7 @@ class WebApiServices {
     @required String cnp,
     @required String address,
     @required String email,
-    // bool status,
+    @required GlobalKey<ScaffoldState> scaffoldKey,
   }) async {
     var body = jsonEncode({
       "Username": username,
@@ -60,12 +60,25 @@ class WebApiServices {
       },
     );
 
-    // if (result.statusCode == 200) {
-    //   showPostSnackBar();
-    // } else {
-    //   showErrorSnackBar();
-    // }
+    if (result.statusCode == 200) {
+      final snackBar = new SnackBar(
+        content: Text(
+          "There is an error!",
+          style: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Colors.green,
+      );
 
-    return null;
+      scaffoldKey.currentState.showSnackBar(snackBar);
+      // } else {
+      //   showErrorSnackBar();
+      // }
+
+      return null;
+    }
   }
 }

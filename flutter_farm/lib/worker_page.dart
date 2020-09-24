@@ -23,6 +23,7 @@ class _WorkerPageState extends State<WorkerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightGreen[200],
       appBar: AppBar(
         title: Text(widget.title),
       ),

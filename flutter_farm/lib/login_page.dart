@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 
+// import 'package:flutter_farm/web_api_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_farm/worker_page.dart';
+
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +16,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+
   String username = "";
   String password = "";
 
@@ -21,6 +26,10 @@ class _LoginPageState extends State<LoginPage> {
   _LoginPageState() {
     fetchData();
   }
+
+  // Future<List<dynamic>> fetchData() async {
+  //   users = await WebApiServices.users;
+  // }
 
   Future<List<String>> fetchData() async {
     var result =
@@ -64,29 +73,44 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightGreen[200],
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: Center(
+      body: Form(
+        key: _formKey,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
+            TextFormField(
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                hintText: "Username",
+              ),
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = username,
               onChanged: (value) {
                 username = value;
               },
-              decoration: InputDecoration(hintText: 'Username'),
             ),
-            TextField(
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: "Password",
+              ),
+              validator: (value) {
+                if (value == '') {
+                  return 'Insert some text';
+                }
+                return null;
+              },
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = password,
               onChanged: (value) {
                 password = value;
               },
-              decoration: InputDecoration(hintText: 'Password'),
             ),
             RaisedButton(
               elevation: 90,
@@ -95,7 +119,12 @@ class _LoginPageState extends State<LoginPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
-                verifyCredentials();
+                if (_formKey.currentState.validate()) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage(title: "Home")));
+                }
               },
               child: Text("Login"),
             )
