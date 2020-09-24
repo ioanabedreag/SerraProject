@@ -7,7 +7,7 @@
   </Function>
   <Function Name="AddPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Harvest" Type="nchar" Mode="In" />
-    <Parameter Name="PlantationID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
   <Function Name="AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Username" Type="nchar" Mode="In" />
@@ -16,6 +16,7 @@
     <Parameter Name="CNP" Type="nchar" Mode="In" />
     <Parameter Name="Addess" Type="nchar" Mode="In" />
     <Parameter Name="Email" Type="nchar" Mode="In" />
+    <Parameter Name="Plantation" Type="nchar" Mode="In" />
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
   <Function Name="AddWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

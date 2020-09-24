@@ -45,20 +45,20 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddHarvestedQuantityByWorker", quantityParameter, usernameParameter, workernameParameter);
         }
     
-        public virtual int AddPlantation(string harvest, Nullable<int> plantationID)
+        public virtual int AddPlantation(string harvest, Nullable<int> userID)
         {
             var harvestParameter = harvest != null ?
                 new ObjectParameter("Harvest", harvest) :
                 new ObjectParameter("Harvest", typeof(string));
     
-            var plantationIDParameter = plantationID.HasValue ?
-                new ObjectParameter("PlantationID", plantationID) :
-                new ObjectParameter("PlantationID", typeof(int));
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddPlantation", harvestParameter, plantationIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddPlantation", harvestParameter, userIDParameter);
         }
     
-        public virtual int AddUser(string username, string password, string name, string cNP, string addess, string email, Nullable<int> userID)
+        public virtual int AddUser(string username, string password, string name, string cNP, string addess, string email, string plantation, Nullable<int> userID)
         {
             var usernameParameter = username != null ?
                 new ObjectParameter("Username", username) :
@@ -84,11 +84,15 @@ namespace FarmApi
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));
     
+            var plantationParameter = plantation != null ?
+                new ObjectParameter("Plantation", plantation) :
+                new ObjectParameter("Plantation", typeof(string));
+    
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
                 new ObjectParameter("UserID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", usernameParameter, passwordParameter, nameParameter, cNPParameter, addessParameter, emailParameter, userIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", usernameParameter, passwordParameter, nameParameter, cNPParameter, addessParameter, emailParameter, plantationParameter, userIDParameter);
         }
     
         public virtual int AddWorker(string workername)

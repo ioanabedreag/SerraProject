@@ -12,7 +12,7 @@
         </Function>
         <Function Name="AddPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Harvest" Type="nchar" Mode="In" />
-          <Parameter Name="PlantationID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
         <Function Name="AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="nchar" Mode="In" />
@@ -21,6 +21,7 @@
           <Parameter Name="CNP" Type="nchar" Mode="In" />
           <Parameter Name="Addess" Type="nchar" Mode="In" />
           <Parameter Name="Email" Type="nchar" Mode="In" />
+          <Parameter Name="Plantation" Type="nchar" Mode="In" />
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
         <Function Name="AddWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -78,7 +79,7 @@
           </FunctionImport>
           <FunctionImport Name="AddPlantation">
             <Parameter Name="Harvest" Mode="In" Type="String" />
-            <Parameter Name="PlantationID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AddUser">
             <Parameter Name="Username" Mode="In" Type="String" />
@@ -87,6 +88,7 @@
             <Parameter Name="CNP" Mode="In" Type="String" />
             <Parameter Name="Addess" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Plantation" Mode="In" Type="String" />
             <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AddWorker">

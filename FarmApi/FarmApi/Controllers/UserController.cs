@@ -36,7 +36,8 @@ namespace FarmApi.Controllers
                 String address = client["Address"];
                 String cnp = client["CNP"];
                 String email = client["Email"];
-                _context.AddUser(username, password, name, cnp, address, email, 0);
+                String plantation = client["Plantation"];
+                _context.AddUser(username, password, name, cnp, address, email, plantation,0);
                 return Ok("User added successfully!");
             }
             catch (Exception ex)
