@@ -28,12 +28,8 @@ namespace FarmApi
         }
     
     
-        public virtual int AddHarvestedQuantityByWorker(string qRCode, Nullable<double> quantity, string username)
+        public virtual int AddHarvestedQuantityByWorker(Nullable<double> quantity, string username, string workername)
         {
-            var qRCodeParameter = qRCode != null ?
-                new ObjectParameter("QRCode", qRCode) :
-                new ObjectParameter("QRCode", typeof(string));
-    
             var quantityParameter = quantity.HasValue ?
                 new ObjectParameter("quantity", quantity) :
                 new ObjectParameter("quantity", typeof(double));
@@ -42,7 +38,11 @@ namespace FarmApi
                 new ObjectParameter("username", username) :
                 new ObjectParameter("username", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddHarvestedQuantityByWorker", qRCodeParameter, quantityParameter, usernameParameter);
+            var workernameParameter = workername != null ?
+                new ObjectParameter("workername", workername) :
+                new ObjectParameter("workername", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddHarvestedQuantityByWorker", quantityParameter, usernameParameter, workernameParameter);
         }
     
         public virtual int AddPlantation(string harvest, Nullable<int> plantationID)
@@ -91,17 +91,13 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", usernameParameter, passwordParameter, nameParameter, cNPParameter, addessParameter, emailParameter, userIDParameter);
         }
     
-        public virtual int AddWorker(string name, string qRCode)
+        public virtual int AddWorker(string workername)
         {
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
+            var workernameParameter = workername != null ?
+                new ObjectParameter("workername", workername) :
+                new ObjectParameter("workername", typeof(string));
     
-            var qRCodeParameter = qRCode != null ?
-                new ObjectParameter("QRCode", qRCode) :
-                new ObjectParameter("QRCode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddWorker", nameParameter, qRCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddWorker", workernameParameter);
         }
     
         public virtual int DeletePlantation(Nullable<int> plantationID)
@@ -122,13 +118,13 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteUser", usernameParameter);
         }
     
-        public virtual int DeleteWorker(string qRCode)
+        public virtual int DeleteWorker(string workerName)
         {
-            var qRCodeParameter = qRCode != null ?
-                new ObjectParameter("QRCode", qRCode) :
-                new ObjectParameter("QRCode", typeof(string));
+            var workerNameParameter = workerName != null ?
+                new ObjectParameter("WorkerName", workerName) :
+                new ObjectParameter("WorkerName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteWorker", qRCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteWorker", workerNameParameter);
         }
     
         public virtual ObjectResult<GetAllPlantations_Result> GetAllPlantations()
@@ -141,9 +137,9 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllUsers_Result>("GetAllUsers");
         }
     
-        public virtual ObjectResult<GetAllWorkers_Result> GetAllWorkers()
+        public virtual ObjectResult<string> GetAllWorkers()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllWorkers_Result>("GetAllWorkers");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetAllWorkers");
         }
     
         public virtual ObjectResult<GetPlantationByUserID_Result> GetPlantationByUserID(Nullable<int> userID)
@@ -155,22 +151,22 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlantationByUserID_Result>("GetPlantationByUserID", userIDParameter);
         }
     
-        public virtual ObjectResult<GetQuantitiesByWorker_Result> GetQuantitiesByWorker(string qRCode)
+        public virtual ObjectResult<GetQuantitiesByWorker_Result> GetQuantitiesByWorker(string workerName)
         {
-            var qRCodeParameter = qRCode != null ?
-                new ObjectParameter("QRCode", qRCode) :
-                new ObjectParameter("QRCode", typeof(string));
+            var workerNameParameter = workerName != null ?
+                new ObjectParameter("WorkerName", workerName) :
+                new ObjectParameter("WorkerName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetQuantitiesByWorker_Result>("GetQuantitiesByWorker", qRCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetQuantitiesByWorker_Result>("GetQuantitiesByWorker", workerNameParameter);
         }
     
-        public virtual ObjectResult<Nullable<double>> GetTotalQuantityByWorker(string qRCode)
+        public virtual ObjectResult<Nullable<double>> GetTotalQuantityByWorker(string workerName)
         {
-            var qRCodeParameter = qRCode != null ?
-                new ObjectParameter("QRCode", qRCode) :
-                new ObjectParameter("QRCode", typeof(string));
+            var workerNameParameter = workerName != null ?
+                new ObjectParameter("WorkerName", workerName) :
+                new ObjectParameter("WorkerName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetTotalQuantityByWorker", qRCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetTotalQuantityByWorker", workerNameParameter);
         }
     
         public virtual ObjectResult<GetUserByUsernameAndPassword_Result> GetUserByUsernameAndPassword(string username, string password)

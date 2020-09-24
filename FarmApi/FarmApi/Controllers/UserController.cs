@@ -55,7 +55,7 @@ namespace FarmApi.Controllers
             }
             catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 

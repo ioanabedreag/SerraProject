@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="FarmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <Function Name="AddHarvestedQuantityByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="QRCode" Type="nchar" Mode="In" />
     <Parameter Name="quantity" Type="float" Mode="In" />
     <Parameter Name="username" Type="nchar" Mode="In" />
+    <Parameter Name="workername" Type="nchar" Mode="In" />
   </Function>
   <Function Name="AddPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Harvest" Type="nchar" Mode="In" />
@@ -19,8 +19,7 @@
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
   <Function Name="AddWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="name" Type="nchar" Mode="In" />
-    <Parameter Name="QRCode" Type="nchar" Mode="In" />
+    <Parameter Name="workername" Type="nchar" Mode="In" />
   </Function>
   <Function Name="DeletePlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PlantationID" Type="int" Mode="In" />
@@ -29,7 +28,7 @@
     <Parameter Name="Username" Type="nchar" Mode="In" />
   </Function>
   <Function Name="DeleteWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="QRCode" Type="nchar" Mode="In" />
+    <Parameter Name="WorkerName" Type="nchar" Mode="In" />
   </Function>
   <Function Name="GetAllPlantations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -38,10 +37,10 @@
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
   <Function Name="GetQuantitiesByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="QRCode" Type="nchar" Mode="In" />
+    <Parameter Name="WorkerName" Type="nchar" Mode="In" />
   </Function>
   <Function Name="GetTotalQuantityByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="QRCode" Type="nchar" Mode="In" />
+    <Parameter Name="WorkerName" Type="nchar" Mode="In" />
   </Function>
   <Function Name="GetUserByUsernameAndPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Username" Type="nchar" Mode="In" />

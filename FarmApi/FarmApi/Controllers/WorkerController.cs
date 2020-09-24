@@ -29,9 +29,8 @@ namespace FarmApi.Controllers
             _context = new FarmEntities();
             try
             {
-                String name = client["Username"];
-                String qRCode = client["QRCode"];
-                _context.AddWorker(name, qRCode);
+                String workername = client["WorkerName"];
+                _context.AddWorker(workername);
                 return Ok("Worker added successfully!");
             }
             catch (Exception ex)
@@ -45,10 +44,10 @@ namespace FarmApi.Controllers
             _context = new FarmEntities();
             try
             {
-                String name = client["Username"];
-                String qRCode = client["QRCode"];
-                float quantity = client["Quantity"];
-                _context.AddHarvestedQuantityByWorker(qRCode, quantity, name);
+                String username = client["Username"];
+                String workername = client["WorkerName"];
+                double quantity = client["Quantity"];
+                _context.AddHarvestedQuantityByWorker(quantity, username, workername);
                 return Ok("Harvested quantity by worker added successfully!");
             }
             catch (Exception ex)
@@ -57,12 +56,12 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult GetQuantitiesByWorker(string qrCode)
+        public IHttpActionResult GetQuantitiesByWorker(string workername)
         {
             _context = new FarmEntities();
             try
             {
-                var quantities = _context.GetQuantitiesByWorker(qrCode);
+                var quantities = _context.GetQuantitiesByWorker(workername);
                 return Ok(quantities);
             }
             catch (Exception ex)
@@ -71,12 +70,12 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult GetTotalQuantityByWorker(string qrCode)
+        public IHttpActionResult GetTotalQuantityByWorker(string workername)
         {
             _context = new FarmEntities();
             try
             {
-                var quantity = _context.GetTotalQuantityByWorker(qrCode);
+                var quantity = _context.GetTotalQuantityByWorker(workername);
                 return Ok(quantity);
             }
             catch (Exception ex)
@@ -85,17 +84,17 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult DeleteWorker(string qrCode)
+        public IHttpActionResult DeleteWorker(string workername)
         {
             _context = new FarmEntities();
             try
             {
-                _context.DeleteWorker(qrCode);
+                _context.DeleteWorker(workername);
                 return Ok("Deleted");
             }
             catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
     }

@@ -30,14 +30,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GetAllWorkers" FunctionName="FarmModel.Store.GetAllWorkers">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="FarmModel.GetAllWorkers_Result">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="QRCode" ColumnName="QRCode" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllWorkers" FunctionName="FarmModel.Store.GetAllWorkers" />
     <FunctionImportMapping FunctionImportName="GetPlantationByUserID" FunctionName="FarmModel.Store.GetPlantationByUserID">
       <ResultMapping>
         <ComplexTypeMapping TypeName="FarmModel.GetPlantationByUserID_Result">
