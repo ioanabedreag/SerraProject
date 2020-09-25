@@ -54,12 +54,12 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult GetPlantationByUser(int userID)
+        public IHttpActionResult GetPlantationByUser(string username)
         {
             _context = new FarmEntities();
             try
             {
-                var plantation = _context.GetPlantationByUserID(userID).FirstOrDefault();
+                var plantation = _context.GetPlantationByUser(username).FirstOrDefault();
                 return Ok(plantation);
             }
             catch (Exception ex)

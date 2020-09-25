@@ -189,7 +189,10 @@
     <Compile Include="GetAllUsers_Result.cs">
       <DependentUpon>FarmModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetPlantationByUserID_Result.cs">
+    <Compile Include="GetPlantationByUser_Result.cs">
+      <DependentUpon>FarmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetQuantitiesByPlantation_Result.cs">
       <DependentUpon>FarmModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetQuantitiesByWorker_Result.cs">

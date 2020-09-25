@@ -31,12 +31,19 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetAllWorkers" FunctionName="FarmModel.Store.GetAllWorkers" />
-    <FunctionImportMapping FunctionImportName="GetPlantationByUserID" FunctionName="FarmModel.Store.GetPlantationByUserID">
+    <FunctionImportMapping FunctionImportName="GetPlantationByUser" FunctionName="FarmModel.Store.GetPlantationByUser">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="FarmModel.GetPlantationByUserID_Result">
-          <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
+        <ComplexTypeMapping TypeName="FarmModel.GetPlantationByUser_Result">
           <ScalarProperty Name="Harvest" ColumnName="Harvest" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetQuantitiesByPlantation" FunctionName="FarmModel.Store.GetQuantitiesByPlantation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FarmModel.GetQuantitiesByPlantation_Result">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="WorkerName" ColumnName="WorkerName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -48,7 +55,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GetTotalQuantityByWorker" FunctionName="FarmModel.Store.GetTotalQuantityByWorker" />
     <FunctionImportMapping FunctionImportName="GetUserByUsernameAndPassword" FunctionName="FarmModel.Store.GetUserByUsernameAndPassword">
       <ResultMapping>
         <ComplexTypeMapping TypeName="FarmModel.GetUserByUsernameAndPassword_Result">

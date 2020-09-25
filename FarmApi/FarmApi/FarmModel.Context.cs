@@ -146,13 +146,22 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetAllWorkers");
         }
     
-        public virtual ObjectResult<GetPlantationByUserID_Result> GetPlantationByUserID(Nullable<int> userID)
+        public virtual ObjectResult<GetPlantationByUser_Result> GetPlantationByUser(string username)
         {
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlantationByUserID_Result>("GetPlantationByUserID", userIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlantationByUser_Result>("GetPlantationByUser", usernameParameter);
+        }
+    
+        public virtual ObjectResult<GetQuantitiesByPlantation_Result> GetQuantitiesByPlantation(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetQuantitiesByPlantation_Result>("GetQuantitiesByPlantation", usernameParameter);
         }
     
         public virtual ObjectResult<GetQuantitiesByWorker_Result> GetQuantitiesByWorker(string workerName)
@@ -162,15 +171,6 @@ namespace FarmApi
                 new ObjectParameter("WorkerName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetQuantitiesByWorker_Result>("GetQuantitiesByWorker", workerNameParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<double>> GetTotalQuantityByWorker(string workerName)
-        {
-            var workerNameParameter = workerName != null ?
-                new ObjectParameter("WorkerName", workerName) :
-                new ObjectParameter("WorkerName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetTotalQuantityByWorker", workerNameParameter);
         }
     
         public virtual ObjectResult<GetUserByUsernameAndPassword_Result> GetUserByUsernameAndPassword(string username, string password)
