@@ -24,12 +24,12 @@ namespace FarmApi.Controllers
             }
         }
 
-        public IHttpActionResult GetQuantitiesByPlantation(string username)
+        public IHttpActionResult GetQuantitiesByPlantation()
         {
             _context = new FarmEntities();
             try
             {
-                var quantity = _context.GetQuantitiesByPlantation(username);
+                var quantity = _context.GetQuantitiesByPlantation();
                 return Ok(quantity);
             }
             catch (Exception ex)

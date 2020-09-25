@@ -155,13 +155,9 @@ namespace FarmApi
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlantationByUser_Result>("GetPlantationByUser", usernameParameter);
         }
     
-        public virtual ObjectResult<GetQuantitiesByPlantation_Result> GetQuantitiesByPlantation(string username)
+        public virtual ObjectResult<GetQuantitiesByPlantation_Result> GetQuantitiesByPlantation()
         {
-            var usernameParameter = username != null ?
-                new ObjectParameter("Username", username) :
-                new ObjectParameter("Username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetQuantitiesByPlantation_Result>("GetQuantitiesByPlantation", usernameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetQuantitiesByPlantation_Result>("GetQuantitiesByPlantation");
         }
     
         public virtual ObjectResult<GetQuantitiesByWorker_Result> GetQuantitiesByWorker(string workerName)
