@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                             builder: (context) => NewWorkerPage()));
                   },
-                  child: Text('Add New Worler'),
+                  child: Text('Add New Worker'),
                 ),
               ],
             ),

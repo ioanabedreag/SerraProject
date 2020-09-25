@@ -22,4 +22,7 @@ class ApiUrl {
 
   static const String getQuantitiesByPlantationUrl =
       'https://farmapi.conveyor.cloud/api/Plantation/GetQuantitiesByPlantation';
+
+  static const String getAllPlantationsUrl =
+      'https://farmapi.conveyor.cloud/api/Plantation/GetAllPlantation';
 }

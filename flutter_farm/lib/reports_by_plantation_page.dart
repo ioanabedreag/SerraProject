@@ -19,7 +19,7 @@ class ReportsByPlantationPage extends StatefulWidget {
 class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool ok = false;
-  List<dynamic> workers = new List();
+  List<dynamic> plantations = new List();
   List<dynamic> quantities = new List();
 
   @override
@@ -29,7 +29,7 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
   }
 
   Future<List<String>> fetchDataPlantations() async {
-    var url = ApiUrl.getQuantitiesByPlantationUrl;
+    var url = ApiUrl.getAllPlantationsUrl;
     var result = await http.get(url);
     if (result.statusCode != 200) {
       showErrorSnackBar(result.body.toString());
@@ -37,14 +37,13 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
     }
     var jsonResult = result.body;
     setState(() {
-      workers = json.decode(jsonResult);
+      plantations = json.decode(jsonResult);
     });
     return null;
   }
 
   Future<List<String>> fetchDataQuantities(String selectedUser) async {
-    var url = ApiUrl.getQuantitiesByWorkerUrl +
-        selectedUser.replaceAll(new RegExp(r'\s'), '');
+    var url = ApiUrl.getQuantitiesByPlantationUrl;
     var result = await http.get(url);
     if (result.statusCode != 200) {
       showErrorSnackBar(result.body.toString());
@@ -77,12 +76,13 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.lightGreen[200],
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Container(
-        child: workers.length == 0
+        child: plantations.length == 0
             ? Text('Wait!')
             : ok == false
                 ? DataTable(
@@ -96,7 +96,25 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                             bottom: 0.0,
                           ),
                           child: Text(
-                            'Workers',
+                            'Plantations',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Padding(
+                          padding: EdgeInsets.only(
+                            left: 120.0,
+                            right: 0.0,
+                            top: 0.0,
+                            bottom: 0.0,
+                          ),
+                          child: Text(
+                            'Users',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -107,12 +125,12 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                       ),
                     ],
                     rows: List<DataRow>.generate(
-                      workers.length,
+                      plantations.length,
                       (index) => DataRow(
                         cells: <DataCell>[
                           DataCell(
                             Text(
-                              workers[index],
+                              plantations[index]['Harvest'],
                               style: TextStyle(
                                 color: Colors.green[600],
                                 fontWeight: FontWeight.bold,
@@ -122,7 +140,25 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                             onTap: () {
                               setState(() {
                                 ok = true;
-                                fetchDataQuantities(workers[index]);
+                                fetchDataQuantities(
+                                    plantations[index]['Username']);
+                              });
+                            },
+                          ),
+                          DataCell(
+                            Text(
+                              plantations[index]['Username'],
+                              style: TextStyle(
+                                color: Colors.green[600],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                ok = true;
+                                fetchDataQuantities(
+                                    plantations[index]['Username']);
                               });
                             },
                           )
@@ -142,7 +178,7 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              child: Text('Back to Workers'),
+                              child: Text('Back to Plantations'),
                               onPressed: () {
                                 setState(() {
                                   ok = false;
@@ -163,7 +199,7 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                                 ),
                                 DataColumn(
                                   label: Text(
-                                    'Plantation',
+                                    'Worker',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -181,7 +217,7 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                                           .toString()),
                                     ),
                                     DataCell(
-                                      Text(quantities[index]['Harvest']),
+                                      Text(quantities[index]['WorkerName']),
                                     ),
                                   ],
                                 ),
