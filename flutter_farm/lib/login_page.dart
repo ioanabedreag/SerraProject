@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter_farm/user_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
     //   users = json.decode(jsonResult);
     // });
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => WorkerPage(title: "Worker")));
+        MaterialPageRoute(builder: (context) => UserPage(title: "Worker")));
     return null;
   }
 
