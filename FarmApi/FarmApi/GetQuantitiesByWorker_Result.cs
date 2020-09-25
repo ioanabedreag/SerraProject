@@ -15,5 +15,6 @@ namespace FarmApi
     {
         public double Quantity { get; set; }
         public string Harvest { get; set; }
+        public string Username { get; set; }
     }
 }

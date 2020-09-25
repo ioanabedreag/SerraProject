@@ -84,6 +84,7 @@
   <ComplexType Name="GetQuantitiesByWorker_Result">
     <Property Type="Double" Name="Quantity" Nullable="false" />
     <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="30" />
   </ComplexType>
   <ComplexType Name="GetUserByUsernameAndPassword_Result">
     <Property Type="Int32" Name="UserID" Nullable="false" />

@@ -51,6 +51,7 @@
         <ComplexTypeMapping TypeName="FarmModel.GetQuantitiesByWorker_Result">
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Harvest" ColumnName="Harvest" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
