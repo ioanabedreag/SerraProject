@@ -41,8 +41,8 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
   }
 
   Future<List<String>> fetchDataQuantities(String selectedWorker) async {
-    var newString = selectedWorker.replaceAll(new RegExp(r'\s'), '');
-    var url = ApiUrl.getQuantitiesByWorkerUrl + newString;
+    var url = ApiUrl.getQuantitiesByWorkerUrl +
+        selectedWorker.replaceAll(new RegExp(r'\s'), '');
     var result = await http.get(url);
     if (result.statusCode != 200) {
       showErrorSnackBar(result.body.toString());

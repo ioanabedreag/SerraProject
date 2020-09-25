@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_farm/reports_by_plantation_page.dart';
 
-import 'package:flutter_farm/reports_page.dart';
+import 'package:flutter_farm/reports_by_worker_page.dart';
 import 'package:flutter_farm/worker_page.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({Key key, this.title}) : super(key: key);
+  UserPage({Key key, this.title, @required this.username}) : super(key: key);
 
   final String title;
+  final String username;
 
   @override
   _UserPageState createState() => _UserPageState();
@@ -27,6 +29,7 @@ class _UserPageState extends State<UserPage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Column(
               children: <Widget>[
@@ -52,11 +55,27 @@ class _UserPageState extends State<UserPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ReportsPage(
+                            builder: (context) => ReportsByWorkerPage(
                                   title: 'Reports',
                                 )));
                   },
-                  child: Text('View reports'),
+                  child: Text('View reports by worker'),
+                ),
+                RaisedButton(
+                  elevation: 90,
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReportsByPlantationPage(
+                                  title: 'Reports',
+                                )));
+                  },
+                  child: Text('View reports by plantation'),
                 ),
               ],
             ),

@@ -5,9 +5,11 @@ import 'dart:convert';
 import 'api_url.dart';
 
 class ReportsByPlantationPage extends StatefulWidget {
-  ReportsByPlantationPage({Key key, this.title}) : super(key: key);
+  ReportsByPlantationPage({Key key, this.title, this.username})
+      : super(key: key);
 
   final String title;
+  final String username;
 
   @override
   _ReportsByPlantationPageState createState() =>
@@ -17,18 +19,17 @@ class ReportsByPlantationPage extends StatefulWidget {
 class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool ok = false;
-  String selectedWorker = '';
   List<dynamic> workers = new List();
   List<dynamic> quantities = new List();
 
   @override
   void initState() {
     super.initState();
-    fetchDataWorkers();
+    fetchDataPlantations();
   }
 
-  Future<List<String>> fetchDataWorkers() async {
-    var url = ApiUrl.getAllWorkersUrl;
+  Future<List<String>> fetchDataPlantations() async {
+    var url = ApiUrl.getQuantitiesByPlantationUrl;
     var result = await http.get(url);
     if (result.statusCode != 200) {
       showErrorSnackBar(result.body.toString());
@@ -41,9 +42,9 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
     return null;
   }
 
-  Future<List<String>> fetchDataQuantities(String selectedWorker) async {
-    var newString = selectedWorker.replaceAll(new RegExp(r'\s'), '');
-    var url = ApiUrl.getQuantitiesByWorkerUrl + newString;
+  Future<List<String>> fetchDataQuantities(String selectedUser) async {
+    var url = ApiUrl.getQuantitiesByWorkerUrl +
+        selectedUser.replaceAll(new RegExp(r'\s'), '');
     var result = await http.get(url);
     if (result.statusCode != 200) {
       showErrorSnackBar(result.body.toString());

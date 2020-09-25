@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter_farm/user_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-import 'package:flutter_farm/worker_page.dart';
-
 import 'api_url.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -17,17 +13,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  final _formKey = GlobalKey<FormState>();
 
   String username = "";
   String password = "";
   bool ok = false;
 
   List<dynamic> users = new List();
-
-  // _LoginPageState() {
-  //   fetchData();
-  // }
 
   Future<List<String>> fetchData() async {
     var url =
@@ -37,12 +28,14 @@ class _LoginPageState extends State<LoginPage> {
       showErrorSnackBar();
       return null;
     }
-    // var jsonResult = result.body;
-    // setState(() {
-    //   users = json.decode(jsonResult);
-    // });
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => UserPage(title: "Worker")));
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => UserPage(
+                  title: "User",
+                  username: username,
+                )));
     return null;
   }
 
