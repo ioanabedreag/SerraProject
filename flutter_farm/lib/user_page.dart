@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_farm/qr_scanner.dart';
 import 'package:flutter_farm/reports_by_plantation_page.dart';
 
 import 'package:flutter_farm/reports_by_worker_page.dart';
@@ -41,7 +42,7 @@ class _UserPageState extends State<UserPage> {
                       borderRadius: BorderRadius.circular(15)),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WorkerPage()));
+                        MaterialPageRoute(builder: (context) => ScannerPage()));
                   },
                   child: Text('Scan QR Code'),
                 ),

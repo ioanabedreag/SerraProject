@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:qrscan/qrscan.dart' as scanner;
+// import 'package:qrscan/qrscan.dart' as scanner;
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
