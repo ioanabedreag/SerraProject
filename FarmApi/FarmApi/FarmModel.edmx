@@ -130,9 +130,8 @@
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllPlantations_Result">
-          <Property Type="Int32" Name="PlantationID" Nullable="false" />
           <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="GetAllUsers_Result">
           <Property Type="Int32" Name="UserID" Nullable="false" />
@@ -180,9 +179,8 @@
           <FunctionImportMapping FunctionImportName="GetAllPlantations" FunctionName="FarmModel.Store.GetAllPlantations">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FarmModel.GetAllPlantations_Result">
-                <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
                 <ScalarProperty Name="Harvest" ColumnName="Harvest" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -11,9 +11,8 @@
     <FunctionImportMapping FunctionImportName="GetAllPlantations" FunctionName="FarmModel.Store.GetAllPlantations">
       <ResultMapping>
         <ComplexTypeMapping TypeName="FarmModel.GetAllPlantations_Result">
-          <ScalarProperty Name="PlantationID" ColumnName="PlantationID" />
           <ScalarProperty Name="Harvest" ColumnName="Harvest" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

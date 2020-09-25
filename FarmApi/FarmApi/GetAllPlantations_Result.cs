@@ -13,8 +13,7 @@ namespace FarmApi
     
     public partial class GetAllPlantations_Result
     {
-        public int PlantationID { get; set; }
         public string Harvest { get; set; }
-        public int UserID { get; set; }
+        public string Username { get; set; }
     }
 }

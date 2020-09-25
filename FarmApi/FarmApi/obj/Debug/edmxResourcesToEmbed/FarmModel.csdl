@@ -38,9 +38,7 @@
     <FunctionImport Name="GetPlantationByUser" ReturnType="Collection(FarmModel.GetPlantationByUser_Result)">
       <Parameter Name="Username" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="GetQuantitiesByPlantation" ReturnType="Collection(FarmModel.GetQuantitiesByPlantation_Result)">
-      <Parameter Name="Username" Mode="In" Type="String" />
-    </FunctionImport>
+    <FunctionImport Name="GetQuantitiesByPlantation" ReturnType="Collection(FarmModel.GetQuantitiesByPlantation_Result)" />
     <FunctionImport Name="GetQuantitiesByWorker" ReturnType="Collection(FarmModel.GetQuantitiesByWorker_Result)">
       <Parameter Name="WorkerName" Mode="In" Type="String" />
     </FunctionImport>
@@ -63,9 +61,8 @@
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetAllPlantations_Result">
-    <Property Type="Int32" Name="PlantationID" Nullable="false" />
     <Property Type="String" Name="Harvest" Nullable="false" MaxLength="10" />
-    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="30" />
   </ComplexType>
   <ComplexType Name="GetAllUsers_Result">
     <Property Type="Int32" Name="UserID" Nullable="false" />
