@@ -24,6 +24,20 @@ namespace FarmApi.Controllers
             }
         }
 
+        public IHttpActionResult GetQuantitiesByPlantation(string username)
+        {
+            _context = new FarmEntities();
+            try
+            {
+                var quantity = _context.GetQuantitiesByPlantation(username);
+                return Ok(quantity);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
         public IHttpActionResult AddPlantation([FromBody] dynamic client)
         {
             _context = new FarmEntities();
