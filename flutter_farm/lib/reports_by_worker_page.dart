@@ -16,9 +16,9 @@ class ReportsByWorkerPage extends StatefulWidget {
 class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool ok = false;
-  String selectedWorker = '';
   List<dynamic> workers = new List();
   List<dynamic> quantities = new List();
+  String worker = '';
 
   @override
   void initState() {
@@ -109,17 +109,19 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                       (index) => DataRow(
                         cells: <DataCell>[
                           DataCell(
-                            Text(
-                              workers[index],
-                              style: TextStyle(
-                                color: Colors.green[600],
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                            Center(
+                              child: Text(
+                                workers[index],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                             onTap: () {
                               setState(() {
                                 ok = true;
+                                worker = workers[index];
                                 fetchDataQuantities(workers[index]);
                               });
                             },
@@ -133,6 +135,95 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                     : Center(
                         child: Column(
                           children: <Widget>[
+                            Column(
+                              children: [
+                                Text(
+                                  'Worker: ',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                Text(
+                                  worker,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            DataTable(
+                              columns: <DataColumn>[
+                                DataColumn(
+                                  label: Text(
+                                    'Quantity',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Plantation',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'User',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              rows: List<DataRow>.generate(
+                                quantities.length,
+                                (index) => DataRow(
+                                  cells: <DataCell>[
+                                    DataCell(
+                                      Text(
+                                        quantities[index]['Quantity']
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Text(
+                                        quantities[index]['Harvest'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Text(
+                                        quantities[index]['Username'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                             RaisedButton(
                               elevation: 90,
                               color: Colors.white,
@@ -146,44 +237,6 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                                   ok = false;
                                 });
                               },
-                            ),
-                            DataTable(
-                              columns: <DataColumn>[
-                                DataColumn(
-                                  label: Text(
-                                    'Quantity',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'Plantation',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                              rows: List<DataRow>.generate(
-                                quantities.length,
-                                (index) => DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(
-                                      Text(quantities[index]['Quantity']
-                                          .toString()),
-                                    ),
-                                    DataCell(
-                                      Text(quantities[index]['Harvest']),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ],
                         ),

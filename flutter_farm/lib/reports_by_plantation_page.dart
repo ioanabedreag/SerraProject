@@ -22,6 +22,9 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
   List<dynamic> plantations = new List();
   List<dynamic> quantities = new List();
 
+  String username = '';
+  String plantation = '';
+
   @override
   void initState() {
     super.initState();
@@ -88,38 +91,22 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                 ? DataTable(
                     columns: [
                       DataColumn(
-                        label: Padding(
-                          padding: EdgeInsets.only(
-                            left: 120.0,
-                            right: 0.0,
-                            top: 0.0,
-                            bottom: 0.0,
-                          ),
-                          child: Text(
-                            'Plantations',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                        label: Text(
+                          'Plantations',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
                       ),
                       DataColumn(
-                        label: Padding(
-                          padding: EdgeInsets.only(
-                            left: 120.0,
-                            right: 0.0,
-                            top: 0.0,
-                            bottom: 0.0,
-                          ),
-                          child: Text(
-                            'Users',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+                        label: Text(
+                          'Users',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -132,14 +119,15 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                             Text(
                               plantations[index]['Harvest'],
                               style: TextStyle(
-                                color: Colors.green[600],
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 15,
                               ),
                             ),
                             onTap: () {
                               setState(() {
                                 ok = true;
+                                username = plantations[index]['Username'];
+                                plantation = plantations[index]['Harvest'];
                                 fetchDataQuantities(
                                     plantations[index]['Username']);
                               });
@@ -149,14 +137,15 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                             Text(
                               plantations[index]['Username'],
                               style: TextStyle(
-                                color: Colors.green[600],
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 15,
                               ),
                             ),
                             onTap: () {
                               setState(() {
                                 ok = true;
+                                username = plantations[index]['Username'];
+                                plantation = plantations[index]['Harvest'];
                                 fetchDataQuantities(
                                     plantations[index]['Username']);
                               });
@@ -168,22 +157,50 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                   )
                 : quantities.length == 0
                     ? Text('Wait')
-                    : Center(
+                    : Container(
                         child: Column(
                           children: <Widget>[
-                            RaisedButton(
-                              elevation: 90,
-                              color: Colors.white,
-                              textColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Text('Back to Plantations'),
-                              onPressed: () {
-                                setState(() {
-                                  ok = false;
-                                });
-                              },
+                            Row(
+                              children: [
+                                Text(
+                                  'Plantation: ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                Text(
+                                  plantation,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'User: ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                Text(
+                                  username,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ],
                             ),
                             DataTable(
                               columns: <DataColumn>[
@@ -213,15 +230,45 @@ class _ReportsByPlantationPageState extends State<ReportsByPlantationPage> {
                                 (index) => DataRow(
                                   cells: <DataCell>[
                                     DataCell(
-                                      Text(quantities[index]['Quantity']
-                                          .toString()),
+                                      Text(
+                                        quantities[index]['Quantity']
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
+                                      ),
                                     ),
                                     DataCell(
-                                      Text(quantities[index]['WorkerName']),
+                                      Text(
+                                        quantities[index]['WorkerName'],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
+                            ),
+                            RaisedButton(
+                              elevation: 90,
+                              color: Colors.white,
+                              textColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Text(
+                                'Back to Plantations',
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  ok = false;
+                                });
+                              },
                             ),
                           ],
                         ),
