@@ -5,15 +5,6 @@ class ApiUrl {
   static const String getUserUrl =
       'https://farmapi.conveyor.cloud/api/User/GetUserByUsernameAndPassword?';
 
-  static const String addUserUrl =
-      'https://farmapi.conveyor.cloud/api/User/AddUser';
-
-  static const String addHarvestQunatityUrl =
-      'https://farmapi.conveyor.cloud/api/Worker/AddHarvestedQuantityByWorker';
-
-  static const String addWorkerUrl =
-      'https://farmapi.conveyor.cloud/api/Worker/AddWorker';
-
   static const String getAllWorkersUrl =
       'https://farmapi.conveyor.cloud/api/Worker/GetAllWorkers';
 
@@ -25,4 +16,13 @@ class ApiUrl {
 
   static const String getAllPlantationsUrl =
       'https://farmapi.conveyor.cloud/api/Plantation/GetAllPlantation';
+
+  static const String addUserUrl =
+      'https://farmapi.conveyor.cloud/api/User/AddUser';
+
+  static const String addHarvestQunatityUrl =
+      'https://farmapi.conveyor.cloud/api/Worker/AddHarvestedQuantityByWorker';
+
+  static const String addWorkerUrl =
+      'https://farmapi.conveyor.cloud/api/Worker/AddWorker';
 }

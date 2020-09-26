@@ -1,12 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
 
-import 'package:flutter_farm/home_page.dart';
-
-import 'api_url.dart';
+import 'package:flutter_farm/api_url.dart';
 
 class NewWorkerPage extends StatefulWidget {
   NewWorkerPage({Key key}) : super(key: key);
@@ -69,6 +67,7 @@ class _NewWorkerPageState extends State<NewWorkerPage> {
     );
     if (result.statusCode == 200) {
       showPostSnackBar();
+      Navigator.pop(context);
     } else {
       showErrorSnackBar();
     }
@@ -84,43 +83,56 @@ class _NewWorkerPageState extends State<NewWorkerPage> {
       appBar: AppBar(
         title: Text("Add New Worker"),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: "Name",
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 0.0,
+                  top: 50.0,
+                  right: 0.0,
+                  bottom: 50.0,
+                ),
+                child: Image(
+                  image: AssetImage('lib/assets/register.png'),
+                  width: 200,
+                  alignment: Alignment.topLeft,
+                ),
               ),
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                workername = value;
-              },
-            ),
-            RaisedButton(
-              elevation: 90,
-              color: Colors.white,
-              textColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  postData();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(title: "Home")));
-                }
-              },
-              child: Text("Done"),
-            )
-          ],
+              TextFormField(
+                validator: (value) {
+                  if (value == '') {
+                    return 'Insert some text';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: "Name",
+                ),
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  workername = value;
+                },
+              ),
+              Text(' '),
+              Text(' '),
+              RaisedButton(
+                elevation: 90,
+                color: Colors.white,
+                textColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    postData();
+                  }
+                },
+                child: Text("Done"),
+              )
+            ],
+          ),
         ),
       ),
     );

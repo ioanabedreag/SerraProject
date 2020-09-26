@@ -1,52 +1,52 @@
 import 'dart:convert';
 
-// import 'package:qrscan/qrscan.dart' as scanner;
-
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-import 'api_url.dart';
-import 'home_page.dart';
+import 'package:flutter_farm/api_url.dart';
+import 'package:flutter_farm/home_page.dart';
 
 class WorkerPage extends StatefulWidget {
-  WorkerPage({Key key, this.title}) : super(key: key);
+  WorkerPage({Key key, this.title, @required this.qrCode}) : super(key: key);
 
   final String title;
+  final String qrCode;
 
   @override
   _WorkerPageState createState() => _WorkerPageState();
 }
 
 class _WorkerPageState extends State<WorkerPage> {
-  String cameraScanResult = "";
-  String qrCode;
-
-  String usernameWorker = "";
-  String usernameUser = "";
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  String workerName = "";
+  String username = "";
   String quantity = "";
 
   @override
   void initState() {
+    int index = 0;
+    var workerNameVar = '';
+    var usernameVar = '';
+    while (widget.qrCode[index] != '-') {
+      workerNameVar += widget.qrCode[index];
+      index++;
+    }
+    index++;
+    while (index < widget.qrCode.length) {
+      usernameVar += widget.qrCode[index];
+      index++;
+    }
+    setState(() {
+      workerName = workerNameVar;
+      username = usernameVar;
+    });
     super.initState();
   }
 
   Future<List<String>> postData() async {
-    int index = 0;
-    usernameWorker = '';
-    usernameUser = '';
-    while (qrCode[index] != '-') {
-      usernameWorker += qrCode[index];
-      index++;
-    }
-    index++;
-    while (index < qrCode.length) {
-      usernameUser += qrCode[index];
-      index++;
-    }
-
     var body = jsonEncode({
-      "WorkerName": usernameWorker,
-      "Username": usernameUser,
+      "WorkerName": workerName,
+      "Username": username,
       "Quantity": quantity,
     });
 
@@ -60,19 +60,34 @@ class _WorkerPageState extends State<WorkerPage> {
     );
 
     if (result.statusCode == 200) {
-      // showPostSnackBar();
-      print("ok");
     } else {
-      // showErrorSnackBar();
-      print("not ok");
+      showErrorSnackBar(result.body.toString());
     }
 
     return null;
   }
 
+  showErrorSnackBar(String message) {
+    final snackBar = new SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          fontFamily: 'OpenSans',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: Colors.red,
+    );
+
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.lightGreen[200],
       appBar: AppBar(
         title: Text(widget.title),
@@ -80,13 +95,41 @@ class _WorkerPageState extends State<WorkerPage> {
       body: Center(
         child: Column(
           children: <Widget>[
+            Text(
+              "Username:",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
             TextField(
+              readOnly: true,
               textAlign: TextAlign.center,
-              controller: TextEditingController()..text = qrCode,
-              onChanged: (value) {
-                qrCode = value;
-              },
-              decoration: InputDecoration(hintText: "QR Code"),
+              controller: TextEditingController()..text = username,
+              decoration: InputDecoration(hintText: "Username"),
+            ),
+            Text(
+              "Worker Name:",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            TextField(
+              readOnly: true,
+              textAlign: TextAlign.center,
+              controller: TextEditingController()..text = workerName,
+              decoration: InputDecoration(hintText: "Worker Name"),
+            ),
+            Text(
+              "Quantity:",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
             TextField(
               textAlign: TextAlign.center,
@@ -104,6 +147,7 @@ class _WorkerPageState extends State<WorkerPage> {
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
                 postData();
+                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

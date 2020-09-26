@@ -13,7 +13,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'Farm'),
+      home: HomePage(
+        title: 'Farm',
+      ),
     );
   }
 }

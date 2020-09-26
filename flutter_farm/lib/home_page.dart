@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_farm/new_user_page.dart';
 import 'package:flutter_farm/new_worker_page.dart';
-
-import 'login_page.dart';
+import 'package:flutter_farm/login_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key, this.title})
+      : super(
+          key: key,
+        );
 
   final String title;
 

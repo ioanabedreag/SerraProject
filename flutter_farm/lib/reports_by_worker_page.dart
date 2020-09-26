@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'api_url.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:flutter_farm/api_url.dart';
 
 class ReportsByWorkerPage extends StatefulWidget {
   ReportsByWorkerPage({Key key, this.title}) : super(key: key);
@@ -81,57 +82,78 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
       ),
       body: Container(
         child: workers.length == 0
-            ? Text('Wait!')
+            ? Center(
+                child: Text(
+                  'Wait!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              )
             : ok == false
-                ? DataTable(
-                    columns: [
-                      DataColumn(
-                        label: Padding(
-                          padding: EdgeInsets.only(
-                            left: 120.0,
-                            right: 0.0,
-                            top: 0.0,
-                            bottom: 0.0,
-                          ),
-                          child: Text(
-                            'Workers',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                ? SingleChildScrollView(
+                    child: DataTable(
+                      columns: [
+                        DataColumn(
+                          label: Padding(
+                            padding: EdgeInsets.only(
+                              left: 120.0,
+                              right: 0.0,
+                              top: 0.0,
+                              bottom: 0.0,
+                            ),
+                            child: Text(
+                              'Workers',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                    rows: List<DataRow>.generate(
-                      workers.length,
-                      (index) => DataRow(
-                        cells: <DataCell>[
-                          DataCell(
-                            Center(
-                              child: Text(
-                                workers[index],
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
+                      ],
+                      rows: List<DataRow>.generate(
+                        workers.length,
+                        (index) => DataRow(
+                          cells: <DataCell>[
+                            DataCell(
+                              Center(
+                                child: Text(
+                                  workers[index],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                ok = true;
-                                worker = workers[index];
-                                fetchDataQuantities(workers[index]);
-                              });
-                            },
-                          )
-                        ],
+                              onTap: () {
+                                setState(() {
+                                  ok = true;
+                                  worker = workers[index];
+                                  fetchDataQuantities(workers[index]);
+                                });
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
                 : quantities.length == 0
-                    ? Text('Wait')
+                    ? Center(
+                        child: Text(
+                          'Wait!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                      )
                     : Center(
                         child: Column(
                           children: <Widget>[
@@ -155,72 +177,74 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                                 ),
                               ],
                             ),
-                            DataTable(
-                              columns: <DataColumn>[
-                                DataColumn(
-                                  label: Text(
-                                    'Quantity',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'Plantation',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'User',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                              rows: List<DataRow>.generate(
-                                quantities.length,
-                                (index) => DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(
-                                      Text(
-                                        quantities[index]['Quantity']
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13,
-                                        ),
+                            SingleChildScrollView(
+                              child: DataTable(
+                                columns: <DataColumn>[
+                                  DataColumn(
+                                    label: Text(
+                                      'Quantity',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
                                       ),
                                     ),
-                                    DataCell(
-                                      Text(
-                                        quantities[index]['Harvest'],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13,
-                                        ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Plantation',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
                                       ),
                                     ),
-                                    DataCell(
-                                      Text(
-                                        quantities[index]['Username'],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13,
-                                        ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'User',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
                                       ),
                                     ),
-                                  ],
+                                  ),
+                                ],
+                                rows: List<DataRow>.generate(
+                                  quantities.length,
+                                  (index) => DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(
+                                        Text(
+                                          quantities[index]['Quantity']
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(
+                                          quantities[index]['Harvest'],
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(
+                                          quantities[index]['Username'],
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

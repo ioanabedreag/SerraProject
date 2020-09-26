@@ -48,9 +48,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - lib/assets/plantation.jpg
-    - lib/assets/agriculture.png
     - lib/assets/farm.png
+    - lib/assets/login.png
+    - lib/assets/qr-code.png
+    - lib/assets/farmer.png
+    - lib/assets/register.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

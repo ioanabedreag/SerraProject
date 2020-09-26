@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter_farm/user_page.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-import 'api_url.dart';
+import 'package:flutter_farm/user_page.dart';
+import 'package:flutter_farm/api_url.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
       return null;
     }
 
+    Navigator.pop(context);
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -61,40 +62,59 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Username",
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 0.0,
+                  top: 50.0,
+                  right: 0.0,
+                  bottom: 20.0,
+                ),
+                child: Image(
+                  image: AssetImage('lib/assets/login.png'),
+                  width: 100,
+                  alignment: Alignment.topLeft,
+                ),
               ),
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                username = value;
-              },
-            ),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Password",
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Username",
+                ),
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  username = value;
+                },
               ),
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                password = value;
-              },
-            ),
-            RaisedButton(
-              elevation: 90,
-              color: Colors.white,
-              textColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              onPressed: () {
-                fetchData();
-              },
-              child: Text("Login"),
-            )
-          ],
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Password",
+                ),
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  password = value;
+                },
+              ),
+              Text(' '),
+              Text(' '),
+              RaisedButton(
+                elevation: 90,
+                color: Colors.white,
+                textColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                onPressed: () {
+                  fetchData();
+                },
+                child: Text(
+                  "Login",
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

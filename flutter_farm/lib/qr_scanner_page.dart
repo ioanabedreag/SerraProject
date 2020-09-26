@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
+import 'package:barcode_scan/barcode_scan.dart';
+
+import 'package:flutter_farm/worker_page.dart';
 
 class ScannerPage extends StatefulWidget {
   @override
@@ -12,14 +14,20 @@ class ScannerPage extends StatefulWidget {
 }
 
 class _ScannerPageState extends State<ScannerPage> {
-  String result = "Hey there !";
+  String result = "Scan the QR Code";
 
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
-      setState(() {
-        result = qrResult;
-      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => WorkerPage(
+            title: "Worker",
+            qrCode: qrResult,
+          ),
+        ),
+      );
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
@@ -44,18 +52,45 @@ class _ScannerPageState extends State<ScannerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightGreen[200],
       appBar: AppBar(
-        title: Text("QR Scanner"),
+        title: Text(
+          "QR Scanner",
+        ),
       ),
       body: Center(
-        child: Text(
-          result,
-          style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                left: 0.0,
+                top: 50.0,
+                right: 0.0,
+                bottom: 100.0,
+              ),
+              child: Image(
+                image: AssetImage('lib/assets/qr-code.png'),
+                width: 200,
+                alignment: Alignment.topLeft,
+              ),
+            ),
+            Text(
+              result,
+              style: new TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.camera_alt),
-        label: Text("Scan"),
+        icon: Icon(
+          Icons.camera_alt,
+        ),
+        label: Text(
+          "Scan",
+        ),
         onPressed: _scanQR,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

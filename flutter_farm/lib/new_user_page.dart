@@ -1,14 +1,11 @@
-import 'dart:convert';
-// import 'dart:io';
-
-import 'package:flutter/material.dart';
-// import 'package:flutter_farm/web_api_services.dart';
-import 'package:http/http.dart' as http;
+import 'dart:io';
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:flutter_farm/home_page.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 
-import 'api_url.dart';
+import 'package:flutter_farm/api_url.dart';
 
 class NewUserPage extends StatefulWidget {
   NewUserPage({Key key}) : super(key: key);
@@ -100,123 +97,141 @@ class _NewUserPageState extends State<NewUserPage> {
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: "Username",
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 0.0,
+                  top: 10.0,
+                  right: 0.0,
+                  bottom: 10.0,
+                ),
+                child: Image(
+                  image: AssetImage('lib/assets/register.png'),
+                  width: 200,
+                  alignment: Alignment.topLeft,
+                ),
               ),
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                username = value;
-              },
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Password",
+              TextFormField(
+                validator: (value) {
+                  if (value == '') {
+                    return 'Insert some text';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: "Username",
+                ),
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  username = value;
+                },
               ),
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                password = value;
-              },
-            ),
-            TextFormField(
-              textAlign: TextAlign.center,
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                name = value;
-              },
-              decoration: InputDecoration(hintText: "Name"),
-            ),
-            TextFormField(
-              textAlign: TextAlign.center,
-              validator: (value) {
-                if (value == '' || value.length != 13) {
-                  return 'Insert a valid CNP';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                cnp = value;
-              },
-              decoration: InputDecoration(hintText: "CNP"),
-            ),
-            TextFormField(
-              textAlign: TextAlign.center,
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                address = value;
-              },
-              decoration: InputDecoration(hintText: "Address"),
-            ),
-            TextFormField(
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                email = value;
-              },
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              decoration: InputDecoration(hintText: "Email"),
-            ),
-            TextFormField(
-              textAlign: TextAlign.center,
-              validator: (value) {
-                if (value == '') {
-                  return 'Insert some text';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                plantation = value;
-              },
-              decoration: InputDecoration(hintText: "Plantation"),
-            ),
-            RaisedButton(
-              elevation: 90,
-              color: Colors.white,
-              textColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  postData();
-                  // sleep(const Duration(seconds: 5));
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(title: "Home")));
-                }
-              },
-              child: Text("Done"),
-            )
-          ],
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Password",
+                ),
+                validator: (value) {
+                  if (value == '') {
+                    return 'Insert some text';
+                  }
+                  return null;
+                },
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  password = value;
+                },
+              ),
+              TextFormField(
+                textAlign: TextAlign.center,
+                validator: (value) {
+                  if (value == '') {
+                    return 'Insert some text';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  name = value;
+                },
+                decoration: InputDecoration(hintText: "Name"),
+              ),
+              TextFormField(
+                textAlign: TextAlign.center,
+                validator: (value) {
+                  RegExp exp = new RegExp(
+                    r"^\d{13}$",
+                  );
+                  if (exp.hasMatch(value) == false) {
+                    return 'Insert a valid CNP';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  cnp = value;
+                },
+                decoration: InputDecoration(hintText: "CNP"),
+              ),
+              TextFormField(
+                textAlign: TextAlign.center,
+                validator: (value) {
+                  if (value == '') {
+                    return 'Insert some text';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  address = value;
+                },
+                decoration: InputDecoration(hintText: "Address"),
+              ),
+              TextFormField(
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                validator: (value) {
+                  RegExp exp = new RegExp(
+                    r"^[A-Za-z0-9._]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$",
+                  );
+                  if (exp.hasMatch(value) == false) {
+                    return 'Insert a valid email!';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(hintText: "Email"),
+              ),
+              TextFormField(
+                textAlign: TextAlign.center,
+                validator: (value) {
+                  if (value == '') {
+                    return 'Insert some text';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  plantation = value;
+                },
+                decoration: InputDecoration(hintText: "Plantation"),
+              ),
+              RaisedButton(
+                elevation: 90,
+                color: Colors.white,
+                textColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    postData();
+                    sleep(const Duration(seconds: 5));
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text("Done"),
+              )
+            ],
+          ),
         ),
       ),
     );
