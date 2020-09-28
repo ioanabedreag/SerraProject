@@ -17,6 +17,7 @@ class ReportsByWorkerPage extends StatefulWidget {
 class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool ok = false;
+  bool okQuantities = false;
   List<dynamic> workers = new List();
   List<dynamic> quantities = new List();
   String worker = '';
@@ -52,6 +53,7 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
     var jsonResult = result.body;
     setState(() {
       quantities = json.decode(jsonResult);
+      okQuantities = true;
     });
     return null;
   }
@@ -134,6 +136,8 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                                 setState(() {
                                   ok = true;
                                   worker = workers[index];
+                                  quantities = new List();
+                                  okQuantities = false;
                                   fetchDataQuantities(workers[index]);
                                 });
                               },
@@ -143,7 +147,7 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                       ),
                     ),
                   )
-                : quantities.length == 0
+                : quantities.length == 0 && okQuantities == false
                     ? Center(
                         child: Text(
                           'Wait!',
@@ -154,117 +158,146 @@ class _ReportsByWorkerPageState extends State<ReportsByWorkerPage> {
                           ),
                         ),
                       )
-                    : Center(
-                        child: Column(
-                          children: <Widget>[
-                            Column(
-                              children: [
-                                Text(
-                                  'Worker: ',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
+                    : quantities.length == 0 && okQuantities == true
+                        ? Center(
+                            child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'This worker has no work done.\n\n',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
                                 ),
-                                Text(
-                                  worker,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
+                              ),
+                              RaisedButton(
+                                elevation: 90,
+                                color: Colors.white,
+                                textColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                              ],
-                            ),
-                            SingleChildScrollView(
-                              child: DataTable(
-                                columns: <DataColumn>[
-                                  DataColumn(
-                                    label: Text(
-                                      'Quantity',
+                                child: Text('Back to Workers'),
+                                onPressed: () {
+                                  setState(() {
+                                    ok = false;
+                                  });
+                                },
+                              ),
+                            ],
+                          ))
+                        : Center(
+                            child: Column(
+                              children: <Widget>[
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Worker: ',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                      ),
+                                    ),
+                                    Text(
+                                      worker,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                                        fontSize: 25,
                                       ),
                                     ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Plantation',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'User',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                                rows: List<DataRow>.generate(
-                                  quantities.length,
-                                  (index) => DataRow(
-                                    cells: <DataCell>[
-                                      DataCell(
-                                        Text(
-                                          quantities[index]['Quantity']
-                                              .toString(),
+                                  ],
+                                ),
+                                SingleChildScrollView(
+                                  child: DataTable(
+                                    columns: <DataColumn>[
+                                      DataColumn(
+                                        label: Text(
+                                          'Quantity',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 13,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          quantities[index]['Harvest'],
+                                      DataColumn(
+                                        label: Text(
+                                          'Plantation',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 13,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          quantities[index]['Username'],
+                                      DataColumn(
+                                        label: Text(
+                                          'User',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 13,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ),
                                     ],
+                                    rows: List<DataRow>.generate(
+                                      quantities.length,
+                                      (index) => DataRow(
+                                        cells: <DataCell>[
+                                          DataCell(
+                                            Text(
+                                              quantities[index]['Quantity']
+                                                  .toString(),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              quantities[index]['Harvest'],
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            Text(
+                                              quantities[index]['Username'],
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                RaisedButton(
+                                  elevation: 90,
+                                  color: Colors.white,
+                                  textColor: Colors.black,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Text('Back to Workers'),
+                                  onPressed: () {
+                                    setState(() {
+                                      ok = false;
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
-                            RaisedButton(
-                              elevation: 90,
-                              color: Colors.white,
-                              textColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Text('Back to Workers'),
-                              onPressed: () {
-                                setState(() {
-                                  ok = false;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
       ),
     );
   }

@@ -148,10 +148,11 @@ class _WorkerPageState extends State<WorkerPage> {
               onPressed: () {
                 postData();
                 Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(title: "Home")));
+                Navigator.pop(context);
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => HomePage(title: "Home")));
               },
               child: Text("Done"),
             )

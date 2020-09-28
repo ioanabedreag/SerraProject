@@ -12,7 +12,7 @@ class ApiUrl {
       'https://farmapi.conveyor.cloud/api/Worker/GetQuantitiesByWorker?workername=';
 
   static const String getQuantitiesByPlantationUrl =
-      'https://farmapi.conveyor.cloud/api/Plantation/GetQuantitiesByPlantation';
+      'https://farmapi.conveyor.cloud/api/Plantation/GetQuantitiesByPlantation?username=';
 
   static const String getAllPlantationsUrl =
       'https://farmapi.conveyor.cloud/api/Plantation/GetAllPlantation';
