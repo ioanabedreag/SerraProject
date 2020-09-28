@@ -42,7 +42,9 @@
         <Function Name="GetPlantationByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="nchar" Mode="In" />
         </Function>
-        <Function Name="GetQuantitiesByPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetQuantitiesByPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nchar" Mode="In" />
+        </Function>
         <Function Name="GetQuantitiesByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="WorkerName" Type="nchar" Mode="In" />
         </Function>
@@ -107,7 +109,9 @@
           <FunctionImport Name="GetPlantationByUser" ReturnType="Collection(FarmModel.GetPlantationByUser_Result)">
             <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetQuantitiesByPlantation" ReturnType="Collection(FarmModel.GetQuantitiesByPlantation_Result)" />
+          <FunctionImport Name="GetQuantitiesByPlantation" ReturnType="Collection(FarmModel.GetQuantitiesByPlantation_Result)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetQuantitiesByWorker" ReturnType="Collection(FarmModel.GetQuantitiesByWorker_Result)">
             <Parameter Name="WorkerName" Mode="In" Type="String" />
           </FunctionImport>

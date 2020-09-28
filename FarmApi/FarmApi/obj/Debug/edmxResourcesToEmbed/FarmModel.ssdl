@@ -37,7 +37,9 @@
   <Function Name="GetPlantationByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Username" Type="nchar" Mode="In" />
   </Function>
-  <Function Name="GetQuantitiesByPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetQuantitiesByPlantation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nchar" Mode="In" />
+  </Function>
   <Function Name="GetQuantitiesByWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="WorkerName" Type="nchar" Mode="In" />
   </Function>

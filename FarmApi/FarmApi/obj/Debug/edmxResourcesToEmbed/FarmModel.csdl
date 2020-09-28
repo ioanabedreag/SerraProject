@@ -38,7 +38,9 @@
     <FunctionImport Name="GetPlantationByUser" ReturnType="Collection(FarmModel.GetPlantationByUser_Result)">
       <Parameter Name="Username" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="GetQuantitiesByPlantation" ReturnType="Collection(FarmModel.GetQuantitiesByPlantation_Result)" />
+    <FunctionImport Name="GetQuantitiesByPlantation" ReturnType="Collection(FarmModel.GetQuantitiesByPlantation_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="GetQuantitiesByWorker" ReturnType="Collection(FarmModel.GetQuantitiesByWorker_Result)">
       <Parameter Name="WorkerName" Mode="In" Type="String" />
     </FunctionImport>
